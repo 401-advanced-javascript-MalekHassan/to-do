@@ -1,13 +1,14 @@
 import React from 'react';
 
 class TodoForm extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = { item: {} };
   }
-  handleInputChange = e => {
-    this.setState({ item: {...this.state.item, [e.target.name]: e.target.value } });
+  handleInputChange = (e) => {
+    this.setState({
+      item: { ...this.state.item, [e.target.name]: e.target.value },
+    });
   };
 
   handleSubmit = (e) => {
@@ -15,7 +16,7 @@ class TodoForm extends React.Component {
     e.target.reset();
     this.props.handleSubmit(this.state.item);
     const item = {};
-    this.setState({item});
+    this.setState({ item });
   };
 
   render() {
@@ -33,13 +34,25 @@ class TodoForm extends React.Component {
           </label>
           <label>
             <span>Difficulty Rating</span>
-            <input defaultValue="1" type="range" min="1" max="5" name="difficulty" onChange={this.handleInputChange} />
+            <input
+              defaultValue="1"
+              type="range"
+              min="1"
+              max="5"
+              name="difficulty"
+              onChange={this.handleInputChange}
+            />
           </label>
           <label>
             <span>Assigned To</span>
-            <input type="text" name="assignee" placeholder="Assigned To" onChange={this.handleInputChange} />
+            <input
+              type="text"
+              name="assignee"
+              placeholder="Assigned To"
+              onChange={this.handleInputChange}
+            />
           </label>
-          <button>Add Item</button>
+          <button id="addItem">Add Item</button>
         </form>
       </>
     );

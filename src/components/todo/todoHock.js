@@ -1,6 +1,18 @@
+// import React, { useState, useEffect } from 'react';
+// import TodoForm from './form.js';
+// import TodoList from './list.js';
+// import Navbar from 'react-bootstrap/Navbar';
+// import Nav from 'react-bootstrap/Nav';
+// import Form from 'react-bootstrap/Form';
+// import FormControl from 'react-bootstrap/FormControl';
+// import Button from 'react-bootstrap/Button';
+
 import React, { useState, useEffect } from 'react';
 import TodoForm from './form.js';
 import TodoList from './list.js';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import Card from 'react-bootstrap/Card';
 import './todo.scss';
 
 export default function TodoHock() {
@@ -10,6 +22,7 @@ export default function TodoHock() {
     item.complete = false;
     setList([...list, item]);
   };
+
   const toggleComplete = (id) => {
     let item = list.filter((i) => i._id === id)[0] || {};
 
@@ -22,7 +35,7 @@ export default function TodoHock() {
     }
   };
   useEffect(() => {
-    let list = [
+    let lists = [
       {
         _id: 1,
         complete: false,
@@ -60,32 +73,39 @@ export default function TodoHock() {
       },
     ];
 
-    setList(list);
+    setList(lists);
+  }, []);
 
-    return () => {
-      <>
-        <header>
-          <h2>
-            There are {list.filter((item) => !item.complete).length} Items To
-            Complete
-          </h2>
-        </header>
-
-        <section className="todo">
-          <div>
-            <TodoForm handleSubmit={addItem()} />
-          </div>
-
-          <div>
-            <TodoList
-              list={this.state.list}
-              handleComplete={toggleComplete()}
-            />
-          </div>
-        </section>
-      </>;
-    };
-  }, [input]);
-
-  return <div></div>;
+  return (
+    <>
+      <header>
+        <Navbar bg="primary" variant="dark">
+          <Nav className="mr-auto">
+            <Nav.Link href="#home">Home</Nav.Link>
+          </Nav>
+        </Navbar>
+        <Navbar
+          bg="dark"
+          variant="dark"
+          style={{ width: '90%', margin: '0 auto', marginTop: '10px' }}
+        >
+          <Navbar.Brand href="#home">
+            To Do List Manager {list.filter((item) => !item.complete).length}
+          </Navbar.Brand>
+        </Navbar>
+      </header>
+      <section className="todo" style={{ marginLeft: '70px' }}>
+        <div>
+          <Card style={{ width: '18rem' }}>
+            <Card.Body>
+              <TodoForm handleSubmit={addItem} />
+            </Card.Body>
+          </Card>
+        </div>
+        <div>
+          <TodoList list={list} handleComplete={toggleComplete} />
+        </div>
+      </section>
+    </>
+  );
 }
