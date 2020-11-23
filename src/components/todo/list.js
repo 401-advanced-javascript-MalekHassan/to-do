@@ -19,7 +19,7 @@ class TodoList extends React.Component {
             }}
           >
             <span onClick={() => this.props.handleComplete(item._id)}>
-              {item.text}
+              {item.assignee} ---- {item.text}
             </span>
           </ListGroup.Item>
         ))}
