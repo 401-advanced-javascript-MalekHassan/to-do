@@ -9,7 +9,7 @@
 
 import React, { useState, useEffect } from 'react';
 import TodoForm from './form.js';
-import TodoList from './list.js';
+import TodoList from './todo-connected';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Card from 'react-bootstrap/Card';
